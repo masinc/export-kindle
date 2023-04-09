@@ -1,7 +1,7 @@
-use std::{env, io};
 use std::fs;
-use std::io::{BufWriter, prelude::*};
+use std::io::{prelude::*, BufWriter};
 use std::path::{Path, PathBuf};
+use std::{env, io};
 
 use clap::Parser;
 
@@ -10,9 +10,9 @@ use cli::Cli;
 use crate::cli::OutputFormat;
 use crate::output::Item;
 
-mod xml;
-mod output;
 mod cli;
+mod output;
+mod xml;
 
 fn default_input_xml_path() -> Result<PathBuf, String> {
     match env::consts::OS {
@@ -59,13 +59,18 @@ fn main() -> anyhow::Result<()> {
 
     let format = cli.format;
 
-    let mut content: xml::Response = {
+    let content: xml::Response = {
         let mut content = String::new();
         // content.push_str(r#"<?xml version="1.0" encoding="UTF-8"?>"#);
         content.push_str(fs::read_to_string(input_xml_path)?.as_str());
         quick_xml::de::from_str(content.as_str())?
     };
-    let items: Vec<Item> = content.add_update_list.meta_data.into_iter().map(|x| x.into()).collect();
+    let items: Vec<Item> = content
+        .add_update_list
+        .meta_data
+        .into_iter()
+        .map(|x| x.into())
+        .collect();
 
     match format {
         OutputFormat::Json => serde_json::to_writer_pretty(output_writer, &items)?,

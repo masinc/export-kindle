@@ -18,8 +18,18 @@ impl From<xml::Metadata> for Item {
         Self {
             asin: metadata.asin,
             title: metadata.title.into(),
-            authors: metadata.authors.author.unwrap_or_default().into_iter().map(|x| x.into()).collect(),
-            publishers: metadata.publishers.into_iter().filter_map(|xp| xp.publisher).collect(),
+            authors: metadata
+                .authors
+                .author
+                .unwrap_or_default()
+                .into_iter()
+                .map(|x| x.into())
+                .collect(),
+            publishers: metadata
+                .publishers
+                .into_iter()
+                .filter_map(|xp| xp.publisher)
+                .collect(),
             publication_date: metadata.publication_date,
             purchase_date: metadata.purchase_date,
             content_type: metadata.content_type,
