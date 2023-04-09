@@ -6,6 +6,12 @@ Export Kindle book list to JSON or YAML.
 
 Kindle for PC/Mac must be installed.
 
+## Installation
+
+```bash
+$ cargo install export-kindle
+```
+
 ## Usage
 
 The following command will convert from Kindle listing data to JSON in the default path.
