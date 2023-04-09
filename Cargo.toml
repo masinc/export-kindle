@@ -1,9 +1,12 @@
 [package]
 name = "export-kindle"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
+authors = ["masinc <masinc000@gmail.com>"]
+description = "Export Kindle book list to JSON or YAML"
+license = "MIT or Apache-2.0"
+repository = "https://github.com/masinc/export-kindle"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 anyhow = "1"
